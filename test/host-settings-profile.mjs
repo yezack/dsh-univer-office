@@ -15,7 +15,7 @@ const { boot, initProfile, loadProfileDirectory, readProfilePatches } = await im
 const dir = await mkdtemp(join(tmpdir(), 'univer-settings-rc1-'))
 let ctx
 try {
-  await mkdir(join(dir, 'node_modules/dsh-univer-office/lib'), { recursive: true })
+  await mkdir(join(dir, 'node_modules/@yezack/dsh-univer-office/lib'), { recursive: true })
   await symlink(
     dirname(dirname(req.resolve('@deepseek-ai/cordis/package.json'))),
     join(dir, 'node_modules/@deepseek-ai')
@@ -29,14 +29,14 @@ try {
   // compatibility gate and can hide a plugin that is skipped in real profiles.
   await Promise.all(
     ['package.json', 'cordis.patch.yml'].map((file) =>
-      copyFile(join(repo, file), join(dir, 'node_modules/dsh-univer-office', file))
+      copyFile(join(repo, file), join(dir, 'node_modules/@yezack/dsh-univer-office', file))
     )
   )
   await copyFile(
     join(repo, 'lib/index.js'),
-    join(dir, 'node_modules/dsh-univer-office/lib/index.js')
+    join(dir, 'node_modules/@yezack/dsh-univer-office/lib/index.js')
   )
-  initProfile(dir, ['dsh-univer-office'])
+  initProfile(dir, ['@yezack/dsh-univer-office'])
   const profile = loadProfileDirectory('dsh', dir, join(runtime, 'package.json'))
   assert.equal(profile.layers.length, 1, 'The real bundle must pass DSH compatibility checks')
   const rows = [
@@ -63,7 +63,7 @@ try {
     // Home and Profile must differ: otherwise the same patch is loaded twice.
     home: join(dir, 'home'),
     cwd: dir,
-    startedBundles: ['dsh-univer-office'],
+    startedBundles: ['@yezack/dsh-univer-office'],
     overlays: [],
     telemetryDisabledEnv: '1'
   }

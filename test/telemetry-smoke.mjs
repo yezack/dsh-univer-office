@@ -265,7 +265,7 @@ function assertPayloadShape(body) {
   const keys = Object.keys(body.properties).toSorted()
   if (keys.join(',') !== EXPECTED_PROPERTIES.join(','))
     throw new Error(`unexpected payload keys: ${keys.join(',')}`)
-  if (body.properties.package_name !== 'dsh-univer-office') throw new Error('wrong package name')
+  if (body.properties.package_name !== manifest.name) throw new Error('wrong package name')
   if (
     body.properties.package_version !== '9.9.9' &&
     body.properties.package_version !== manifest.version

@@ -8,11 +8,11 @@
 
 English · [简体中文](README.zh-CN.md)
 
-[![npm](https://img.shields.io/npm/v/dsh-univer-office)](https://www.npmjs.com/package/dsh-univer-office)
+[![npm](https://img.shields.io/npm/v/@yezack/dsh-univer-office)](https://www.npmjs.com/package/@yezack/dsh-univer-office)
 [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D22.19-339933?logo=node.js&logoColor=white)](package.json)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 
-`dsh-univer-office` is the Univer office plugin for DeepSeek Harness (DSH). Tell the agent what you need and it can create or edit spreadsheets, documents, presentations, multidimensional tables, and canvases, or work with existing Excel, Word, and PowerPoint files. Every change is verified and stays in the conversation for you to preview, approve, or discard.
+`@yezack/dsh-univer-office` is a fork build of DreamNum's Univer office plugin for DeepSeek Harness (DSH), published for deployments that need the hosted-configuration and native-binding fixes made in this fork. Tell the agent what you need and it can create or edit spreadsheets, documents, presentations, multidimensional tables, and canvases, or work with existing Excel, Word, and PowerPoint files. Every change is verified and stays in the conversation for you to preview, approve, or discard.
 
 After installation, describe the result you want in natural language. The agent handles creation, editing, and verification while you follow the work live and review the result in the conversation. Deliver spreadsheets as Excel (`.xlsx`), documents as Word (`.docx`), and presentations as PowerPoint (`.pptx`) files when needed.
 
@@ -114,7 +114,7 @@ If DSH is running, first press **Ctrl+C** in the terminal that started it. You c
 Install the plugin from npm:
 
 ```sh
-dsh plugin --profile web add dsh-univer-office
+dsh plugin --profile web add @yezack/dsh-univer-office
 ```
 
 Restart DSH after installation:
@@ -170,7 +170,7 @@ DSH selects these tools automatically; you normally do not need to call them man
 ## Preview and review experience
 
 - **On-demand preview from the file tree** — click a `.univer` file in the DSH file tree and it opens in the right sidebar, alongside the built-in previews for `.docx`, `.xlsx`, and `.pptx`. No agent operation is involved: this is the entry point that still works when automatic live previews are off. Version navigation and worktree review are handled inside the Viewer. Opening a file without a specific target defaults to the first active worktree when trunk has no documents. It registers on DSH's own right sidebar; when the `dsh-better-sidebar` plugin is installed instead, it is registered as one of that plugin's file viewers, because that plugin takes over file addresses.
-- **Live Univer window** — changes open automatically in a window you can drag, resize, fold, or maximize. Disable automatic opening in the plugin's settings — the **dsh-univer-office** detail page under the sidebar **Plugins** page (or **Settings → Plugins → Plugin configuration** on DSH releases before 0.1.6-alpha.2) — without removing conversation review cards or the file-tree preview above.
+- **Live Univer window** — changes open automatically in a window you can drag, resize, fold, or maximize. Disable automatic opening in the plugin's settings — the **Univer Office** detail page under the sidebar **Plugins** page (or **Settings → Plugins → Plugin configuration** on DSH releases before 0.1.6-alpha.2) — without removing conversation review cards or the file-tree preview above.
 - **Conversation review cards** — each edited `.univer` file has its own full preview card, while deleted temporary files leave no stale cards behind. Turn them off with **Show review cards in the conversation** in the plugin's settings for a more compact conversation; the file-tree preview and the live window are controlled by their own switches.
 - **Pinned worktree comparison** — use **Compare** in a draft or submitted worktree to compare it with trunk or another active worktree. Both sides are pinned when the comparison opens, changed entities can be navigated, and a refresh control appears if either side advances.
 - **Responsive review Header** — View/Compare stays centered when space permits; controls share a compact row and wrap in order as the window narrows. The title shows the selected document name; long names truncate, and merge-status messages remain visible.
@@ -223,7 +223,7 @@ Sends anonymous usage stats after the plugin activates (never file contents or p
 ## Uninstall
 
 ```sh
-dsh plugin --profile web remove dsh-univer-office
+dsh plugin --profile web remove @yezack/dsh-univer-office
 ```
 
 ## Development
@@ -242,7 +242,7 @@ pnpm run test
 
 ## Official package name
 
-Install only `dsh-univer-office`. The following similar names are deprecated npm placeholders reserved by this project to prevent impersonation; they contain no plugin code:
+This fork is published as `@yezack/dsh-univer-office`; install that name. The upstream package is [`dsh-univer-office`](https://www.npmjs.com/package/dsh-univer-office) by DreamNum. The following similar names are deprecated npm placeholders reserved by the upstream project to prevent impersonation; they contain no plugin code:
 
 - `dsh-univer-plugin`
 - `dsh-univer-office-suite`

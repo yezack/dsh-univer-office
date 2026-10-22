@@ -20,6 +20,11 @@ import { createEmbedUiMenuSchemaAliases, createPrismComponentEsmPlugin } from '.
 
 const target = process.argv[2] ?? 'all'
 const require = createRequire(import.meta.url)
+// The client module id must equal the package name the DSH loader registers,
+// scope included, so a fork published under a scope still loads its browser half.
+const { name: pluginName } = JSON.parse(
+  await readFile(new URL('../package.json', import.meta.url), 'utf8')
+)
 
 // Inline-bundle packaging, following the univer-cli model:
 //   - everything JS is inlined (packages: 'bundle')
@@ -87,7 +92,7 @@ if (target === 'all' || target === 'lib') {
   if (clientCode === undefined) throw new Error('client build produced no JavaScript')
   await writeFile(
     'lib/client.js',
-    `window.__ModuleLoader__.load({\n  id: "dsh-univer-office",\n  factory: (require) => {\n    var module = { exports: {} };\n    var exports = module.exports;\n${indent(clientCode, 4)}\n    return module.exports;\n  }\n});\n`
+    `window.__ModuleLoader__.load({\n  id: ${JSON.stringify(pluginName)},\n  factory: (require) => {\n    var module = { exports: {} };\n    var exports = module.exports;\n${indent(clientCode, 4)}\n    return module.exports;\n  }\n});\n`
   )
 
   // Product telemetry entry for the package uninstall hook.

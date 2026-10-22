@@ -8,11 +8,11 @@
 
 [English](README.md) · 简体中文
 
-[![npm](https://img.shields.io/npm/v/dsh-univer-office)](https://www.npmjs.com/package/dsh-univer-office)
+[![npm](https://img.shields.io/npm/v/@yezack/dsh-univer-office)](https://www.npmjs.com/package/@yezack/dsh-univer-office)
 [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D22.19-339933?logo=node.js&logoColor=white)](package.json)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 
-`dsh-univer-office` 是 DeepSeek Harness（DSH）的 Univer 办公插件。告诉 Agent 你想要什么，它可以创建和编辑电子表格、文档、演示文稿、多维表格与画布，也可以处理现有的 Excel、Word 和 PowerPoint 文件。所有修改都会经过校验，并留在会话中供你预览、确认或放弃。
+`@yezack/dsh-univer-office` 是 DreamNum 的 Univer 办公插件（DSH）的 fork 构建，面向需要本 fork 中部署配置与原生依赖修复的内部环境发布。告诉 Agent 你想要什么，它可以创建和编辑电子表格、文档、演示文稿、多维表格与画布，也可以处理现有的 Excel、Word 和 PowerPoint 文件。所有修改都会经过校验，并留在会话中供你预览、确认或放弃。
 
 安装后直接用自然语言描述目标即可。Agent 会完成创建、编辑和校验，你可以在会话中实时查看过程、审阅结果，并把电子表格导出为 Excel（`.xlsx`），或按需交付 Word（`.docx`）和 PowerPoint（`.pptx`）文件。
 
@@ -114,7 +114,7 @@ Agent 可以根据主题、受众、页数、内容结构和视觉要求生成�
 从 npm 安装插件：
 
 ```sh
-dsh plugin --profile web add dsh-univer-office
+dsh plugin --profile web add @yezack/dsh-univer-office
 ```
 
 安装完成后重新启动 DSH：
@@ -170,7 +170,7 @@ DSH 会自动选择这些工具，日常使用不需要手动调用。
 ## 预览与审阅体验
 
 - **文件树按需预览**：在 DSH 文件树中点击 `.univer` 文件即可在右侧栏打开预览，与 `.docx`、`.xlsx`、`.pptx` 的内置预览一致。整个过程不需要 Agent 执行任何操作，因此在关闭自动实时预览后依然可用。版本切换与 worktree 审阅统一在 Viewer 内完成。打开文件时若未指定目标，且主线没有文档，则默认进入第一个活跃 worktree。该入口直接注册在 DSH 自带的右侧栏上；若安装了 `dsh-better-sidebar`，由于该插件会接管文件地址，预览会改为注册成它的文件预览器。
-- **实时 Univer 窗口**：修改默认自动显示在可拖动、缩放、折叠和全屏的窗口中；可在插件设置中关闭自动打开（侧边栏“插件”页面中的 **dsh-univer-office** 详情页；0.1.6-alpha.2 之前的 DSH 版本在“设置 → 插件 → 插件配置”），不影响会话审阅卡片和上面的文件树预览。
+- **实时 Univer 窗口**：修改默认自动显示在可拖动、缩放、折叠和全屏的窗口中；可在插件设置中关闭自动打开（侧边栏“插件”页面中的 **Univer Office** 详情页；0.1.6-alpha.2 之前的 DSH 版本在“设置 → 插件 → 插件配置”），不影响会话审阅卡片和上面的文件树预览。
 - **会话审阅卡片**：每个修改过的 `.univer` 文件都有独立的完整预览卡片；已删除的临时文件不会留下无效卡片。可在插件设置中关闭「在会话中显示审阅卡片」让会话更紧凑——文件树预览与实时窗口由各自的开关独立控制。
 - **固定版本的 worktree 比较**：在草稿或已提交 worktree 中选择“比较”，可与主线或另一个活跃 worktree 对照。打开比较时会固定两侧版本，可逐项定位变更；任一侧继续更新后会显示刷新入口。
 - **响应式审阅 Header**：空间充足时“查看 / 对比”居中，窗口变窄后控件紧凑排列并按顺序换行；标题显示当前文档名，超长名称截断，合并状态提示保持可见。
@@ -223,7 +223,7 @@ Viewer 页面、HTTP API 与 WebSocket 协作流量由插件直接挂载在 DSH 
 ## 卸载
 
 ```sh
-dsh plugin --profile web remove dsh-univer-office
+dsh plugin --profile web remove @yezack/dsh-univer-office
 ```
 
 ## 开发
@@ -242,7 +242,7 @@ pnpm run test
 
 ## 官方包名
 
-请只安装 `dsh-univer-office`。以下相似名称是本项目为防止仿冒而保留的 deprecated npm 占位包，不包含插件代码：
+本 fork 以 `@yezack/dsh-univer-office` 名义发布，请安装该包名。上游包为 DreamNum 的 [`dsh-univer-office`](https://www.npmjs.com/package/dsh-univer-office)。以下相似名称是上游项目为防止仿冒而保留的 deprecated npm 占位包，不包含插件代码：
 
 - `dsh-univer-plugin`
 - `dsh-univer-office-suite`

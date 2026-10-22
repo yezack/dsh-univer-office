@@ -55,7 +55,7 @@ node "$ROOT/scripts/verify-public-runtime-dependencies.mjs" "$PKG_DIR/package.js
 
 # 2. npm tarball from the assembled package directory, so the published
 #    manifest carries the injected native binding dependencies.
-rm -f "$DIST"/dsh-univer-office-*.tgz
+rm -f "$DIST"/*-dsh-univer-office-*.tgz
 (cd "$PKG_DIR" && npm pack --pack-destination "$DIST" --ignore-scripts >/dev/null)
 
 # 3. End-user zip: package contents (installed via `dsh plugin add`).
