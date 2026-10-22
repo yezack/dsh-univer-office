@@ -1,6 +1,7 @@
 import { spawn } from 'node:child_process'
 import { delimiter } from 'node:path'
 import { PLUGIN_NODE_MODULES, UNIT_CONTENT_WORKER_ENTRY } from '../../artifacts/paths.ts'
+import { nodeBinaryPath } from '../../processes/node-binary.ts'
 import { spawnEnvironment } from '../../processes/spawn-env.ts'
 import { UniverError } from '../../service/errors.ts'
 import type { JsonValue } from '../../service/types.ts'
@@ -13,7 +14,7 @@ export class UnitContentWorker {
   /** Run one request and return its JSON result. */
   async run(request: UnitContentWorkerRequest, signal?: AbortSignal): Promise<JsonValue> {
     signal?.throwIfAborted()
-    const child = spawn(process.execPath, [UNIT_CONTENT_WORKER_ENTRY], {
+    const child = spawn(nodeBinaryPath(), [UNIT_CONTENT_WORKER_ENTRY], {
       env: unitContentWorkerEnvironment(),
       stdio: ['pipe', 'pipe', 'pipe'],
       windowsHide: true

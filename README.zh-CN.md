@@ -186,6 +186,7 @@ DSH 会自动选择这些工具，日常使用不需要手动调用。
 - 文件树预览不需要额外插件：它在 DSH 自带右侧栏注册一个 tab 类型，认领以 `.univer` 结尾的 `dsh-resource://file/**` 地址。安装 `dsh-better-sidebar`（`^0.19.0`）期间，该插件会以同档位、更宽的模式接管文件地址，因此预览改为注册成它的文件预览器——两种宿主形态都覆盖，且任一时刻只有一条生效。
 - 打开旧版 `.univer` 文件时会自动升级到 v3 格式：先在原文件旁保存备份，在临时副本中完成迁移和验证，成功后才替换原文件；升级失败时原文件保持不变。再次打开同一份未变化的文件时复用这份备份，不会再复制一份。文件优化仅升级输出副本，不修改源文件。
 - 截图、PDF 打印、Slide 布局检查和 SVG 文字度量需要本机 Chromium 系浏览器。Chrome/Chromium 与 Microsoft Edge 会被自动探测；也可以通过 `browserExecutablePath` 配置项或 `UNIVER_RENDER_BROWSER` 环境变量指定浏览器可执行文件路径（例如 Windows 上的 Edge）。
+- 内置 Gateway 与 Unit Content Worker 会加载原生依赖 `@univerjs-pro/engine-formula-rust-binding` 和 `@univerjs-pro/exchange-node-binding`，它们按 glibc `>= 2.35` 构建。宿主 glibc 更老时（例如 2.28），可把 `UNIVER_NODE_BINARY` 指向一个"用较新加载器启动同一个 Node 可执行文件"的包装脚本，这两个子进程改走它，DSH 宿主仍使用系统 glibc；未设置或留空时继续使用当前 Node 可执行文件。
 - Slide 的母版、版式页和演讲者备注不在当前编辑范围内。
 - Board 的思维导图、表格、墨迹和高级编辑，以及 Board 文件导出尚未开放。
 

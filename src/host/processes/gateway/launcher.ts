@@ -1,6 +1,7 @@
 import type { SpawnOptions } from 'node:child_process'
 import { delimiter } from 'node:path'
 import { GATEWAY_ENTRY, PLUGIN_NODE_MODULES, VIEWER_ROOT } from '../../artifacts/paths.ts'
+import { nodeBinaryPath } from '../node-binary.ts'
 import { spawnEnvironment } from '../spawn-env.ts'
 
 /** Build the fixed executable and environment used for a bundled Gateway. */
@@ -26,7 +27,7 @@ export function gatewayLaunch(port: number): {
       .join(delimiter)
   }
   return {
-    command: process.execPath,
+    command: nodeBinaryPath(),
     args: [GATEWAY_ENTRY],
     options: {
       env: spawnEnvironment(env),

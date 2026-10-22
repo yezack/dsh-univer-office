@@ -15,6 +15,7 @@ export { UniverService } from './service/univer-service.ts'
 export { createUniverRouter } from './webServer/router.ts'
 export { createViewerProxy, type ConnectionTrust } from './webServer/viewer-proxy.ts'
 export { edgeBrowserCandidatePaths } from './provider/render-operations.ts'
+export { nodeBinaryPath } from './processes/node-binary.ts'
 export {
   captureTelemetry,
   parseTelemetryState,

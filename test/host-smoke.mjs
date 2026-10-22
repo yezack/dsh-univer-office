@@ -44,6 +44,32 @@ if (hostBundle.includes('settingsNamespace')) {
     'Host bundle must not import the settingsNamespace export removed in DSH 0.1.2-alpha.2'
   )
 }
+if (!hostBundle.includes('UNIVER_NODE_BINARY')) {
+  throw new Error(
+    'Host bundle must honor UNIVER_NODE_BINARY so the bundled Gateway and Unit Content Worker can be launched through a wrapper'
+  )
+}
+{
+  const { nodeBinaryPath } = UniverPlugin
+  const previous = process.env.UNIVER_NODE_BINARY
+  try {
+    delete process.env.UNIVER_NODE_BINARY
+    if (nodeBinaryPath() !== process.execPath) {
+      throw new Error(`unset UNIVER_NODE_BINARY must fall back to process.execPath`)
+    }
+    process.env.UNIVER_NODE_BINARY = '  /opt/univer-glibc235/node-launcher  '
+    if (nodeBinaryPath() !== '/opt/univer-glibc235/node-launcher') {
+      throw new Error('UNIVER_NODE_BINARY must be trimmed and used verbatim')
+    }
+    process.env.UNIVER_NODE_BINARY = '   '
+    if (nodeBinaryPath() !== process.execPath) {
+      throw new Error('blank UNIVER_NODE_BINARY must fall back to process.execPath')
+    }
+  } finally {
+    if (previous === undefined) delete process.env.UNIVER_NODE_BINARY
+    else process.env.UNIVER_NODE_BINARY = previous
+  }
+}
 try {
   resolveConfig({ gatewayPort: 0 })
   throw new Error('zero Gateway port must be rejected')
